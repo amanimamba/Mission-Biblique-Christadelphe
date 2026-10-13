@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Check, Send, Heart, Phone, User, MessageSquare } from 'lucide-react';
+import { Check, Send } from 'lucide-react';
 import { Branch } from '../data/mockData';
 
 interface ConsultationFormProps {
@@ -28,7 +28,6 @@ export default function ConsultationForm({ branch }: ConsultationFormProps) {
       topic: Yup.string().required('Veuillez choisir un sujet'),
     }),
     onSubmit: (values, { resetForm }) => {
-      // Simulate submission
       setSubmitted(true);
       resetForm();
       setTimeout(() => setSubmitted(false), 8000);
@@ -36,10 +35,10 @@ export default function ConsultationForm({ branch }: ConsultationFormProps) {
   });
 
   return (
-    <section id="contact" className="bg-[#11161b] text-white py-14 px-4 sm:px-8 border-t border-slate-800">
+    <section id="contact" className="bg-[#11161b] text-white py-12 sm:py-14 px-4 sm:px-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-[#1b232a] border border-slate-700/80 rounded-xl p-6 sm:p-10 shadow-xl">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-slate-700/60 pb-6">
+        <div className="bg-[#1b232a] border border-slate-700/80 rounded-xl p-5 sm:p-8 md:p-10 shadow-xl">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 mb-6 sm:mb-8 border-b border-slate-700/60 pb-5 sm:pb-6">
             <div>
               <span className="text-[11px] uppercase tracking-[0.25em] font-semibold text-[#c2674b] block mb-1">
                 Écoute Pastorale & Communion
@@ -49,12 +48,12 @@ export default function ConsultationForm({ branch }: ConsultationFormProps) {
               </h2>
             </div>
             <p className="text-slate-400 text-xs sm:text-sm max-w-md font-light">
-              Besoin d’une prière, d’une étude biblique à domicile ou d’une visite fraternelle à {branch.name} ? Nos anciens sont à votre disposition.
+              Besoin d’une prière, d’une étude biblique ou d’une visite fraternelle à {branch.name} ? Nos anciens sont à votre disposition.
             </p>
           </div>
 
           {submitted ? (
-            <div className="bg-emerald-950/80 border border-emerald-500/50 text-emerald-200 p-6 rounded-lg text-center animate-in fade-in">
+            <div className="bg-emerald-950/80 border border-emerald-500/50 text-emerald-200 p-5 sm:p-6 rounded-lg text-center animate-in fade-in">
               <div className="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Check className="w-6 h-6" />
               </div>
@@ -73,22 +72,20 @@ export default function ConsultationForm({ branch }: ConsultationFormProps) {
                   <label htmlFor="fullName" className="block text-[11px] uppercase tracking-wider text-slate-300 mb-1 font-medium">
                     Nom & Prénom *
                   </label>
-                  <div className="relative">
-                    <input
-                      id="fullName"
-                      name="fullName"
-                      type="text"
-                      placeholder="Ex: Frère Jean Mukendi"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.fullName}
-                      className={`w-full bg-[#13191f] border text-white text-xs sm:text-sm rounded px-3 py-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b] transition-colors ${
-                        formik.touched.fullName && formik.errors.fullName
-                          ? 'border-red-500'
-                          : 'border-slate-700'
-                      }`}
-                    />
-                  </div>
+                  <input
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    placeholder="Ex: Frère Jean Mukendi"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.fullName}
+                    className={`w-full bg-[#13191f] border text-white text-base sm:text-sm rounded px-3 py-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b] transition-colors min-h-[44px] ${
+                      formik.touched.fullName && formik.errors.fullName
+                        ? 'border-red-500'
+                        : 'border-slate-700'
+                    }`}
+                  />
                   {formik.touched.fullName && formik.errors.fullName && (
                     <p className="text-red-400 text-[11px] mt-1">{formik.errors.fullName}</p>
                   )}
@@ -107,7 +104,7 @@ export default function ConsultationForm({ branch }: ConsultationFormProps) {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.phone}
-                    className={`w-full bg-[#13191f] border text-white text-xs sm:text-sm rounded px-3 py-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b] transition-colors ${
+                    className={`w-full bg-[#13191f] border text-white text-base sm:text-sm rounded px-3 py-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b] transition-colors min-h-[44px] ${
                       formik.touched.phone && formik.errors.phone
                         ? 'border-red-500'
                         : 'border-slate-700'
@@ -129,7 +126,7 @@ export default function ConsultationForm({ branch }: ConsultationFormProps) {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.topic}
-                    className="w-full bg-[#13191f] border border-slate-700 text-white text-xs sm:text-sm rounded px-3 py-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b] cursor-pointer"
+                    className="w-full bg-[#13191f] border border-slate-700 text-white text-base sm:text-sm rounded px-3 py-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b] cursor-pointer min-h-[44px]"
                   >
                     <option value="priere">Sujet de Prière & Intercession</option>
                     <option value="etude">Demande d'Étude Biblique</option>
@@ -138,11 +135,11 @@ export default function ConsultationForm({ branch }: ConsultationFormProps) {
                   </select>
                 </div>
 
-                {/* Bouton d'envoi matching template */}
-                <div className="sm:col-span-2 lg:col-span-1 pt-0 sm:pt-[22px]">
+                {/* Bouton d'envoi */}
+                <div className="sm:col-span-2 lg:col-span-1 pt-0 lg:pt-[22px]">
                   <button
                     type="submit"
-                    className="w-full bg-[#c2674b] hover:bg-[#ab573c] text-white font-semibold text-xs uppercase tracking-widest py-3.5 px-4 rounded transition-colors shadow-md flex items-center justify-center gap-2"
+                    className="w-full bg-[#c2674b] hover:bg-[#ab573c] text-white font-semibold text-xs uppercase tracking-widest py-3.5 px-4 rounded transition-colors shadow-md flex items-center justify-center gap-2 min-h-[46px] cursor-pointer active:scale-98"
                   >
                     <Send className="w-4 h-4" />
                     Envoyer la Demande

@@ -8,7 +8,7 @@ interface TestimonialQuoteProps {
 
 export default function TestimonialQuote({ branch }: TestimonialQuoteProps) {
   return (
-    <section className="bg-[#faf7f2] py-16 px-4 sm:px-8 border-b border-[#e8e2d8]">
+    <section className="bg-[#faf7f2] py-12 sm:py-16 px-4 sm:px-8 border-b border-[#e8e2d8]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Text Meditation */}
@@ -19,12 +19,12 @@ export default function TestimonialQuote({ branch }: TestimonialQuoteProps) {
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight mb-4">
               L’Espérance Vivante de l’Évangile
             </h2>
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed mb-6">
+            <p className="text-slate-700 text-xs sm:text-base leading-relaxed mb-6 font-light">
               « Car Dieu a tant aimé le monde qu’il a donné son Fils unique, afin que quiconque
               croit en lui ne périsse point, mais qu’il ait la vie éternelle. »
               Cette certitude divine fonde notre assemblée locale à {branch.name}.
             </p>
-            <div className="flex items-center gap-4 text-xs font-semibold text-slate-700">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
               <span className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-[#c2674b]"></span>
                 Fraction du Pain
@@ -40,20 +40,20 @@ export default function TestimonialQuote({ branch }: TestimonialQuoteProps) {
             </div>
           </div>
 
-          {/* Right Photographic Box with Overlapping Dark Quote Card matching template */}
+          {/* Right Photographic Box with Overlapping Dark Quote Card - responsive height */}
           <div className="lg:col-span-7 relative">
-            <div className="relative rounded-lg overflow-hidden h-[340px] sm:h-[380px] shadow-md border border-[#e8e2d8]">
+            <div className="relative rounded-lg overflow-hidden min-h-[380px] sm:min-h-[360px] md:h-[380px] shadow-md border border-[#e8e2d8] flex flex-col justify-end">
               <img
                 src="/src/assets/images/bible_study_reading_1791887625322.jpg"
                 alt="Méditation biblique"
-                className="w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/30"></div>
+              <div className="absolute inset-0 bg-black/40"></div>
 
               {/* Overlapping Dark Quote Card matching the template */}
-              <div className="absolute bottom-6 right-6 left-6 sm:left-auto sm:max-w-md bg-[#161c22]/95 backdrop-blur-md text-white p-6 rounded-lg border border-slate-700 shadow-2xl">
-                <Quote className="w-6 h-6 text-[#c2674b] mb-2 opacity-80" />
-                <p className="font-serif text-sm sm:text-base italic leading-relaxed text-slate-200 mb-4">
+              <div className="relative z-10 m-3 sm:m-6 sm:max-w-md bg-[#161c22]/95 backdrop-blur-md text-white p-4 sm:p-6 rounded-lg border border-slate-700 shadow-2xl">
+                <Quote className="w-5 h-5 sm:w-6 sm:h-6 text-[#c2674b] mb-1.5 opacity-80" />
+                <p className="font-serif text-xs sm:text-sm md:text-base italic leading-relaxed text-slate-200 mb-3 sm:mb-4">
                   « Là où deux ou trois sont assemblés en mon nom, je suis au milieu d’eux.
                   C’est cette communion fraternelle qui fortifie nos cœurs chaque dimanche. »
                 </p>
@@ -61,13 +61,13 @@ export default function TestimonialQuote({ branch }: TestimonialQuoteProps) {
                   <img
                     src="/src/assets/images/pastor_portrait_dr_congo_1791887626952.jpg"
                     alt="Ancien de la mission"
-                    className="w-10 h-10 rounded-full object-cover border border-[#c2674b]"
+                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-[#c2674b] shrink-0"
                   />
                   <div>
-                    <span className="font-serif text-sm font-bold text-white block">
+                    <span className="font-serif text-xs sm:text-sm font-bold text-white block">
                       Frère Michel Mwamba
                     </span>
-                    <span className="text-[11px] text-[#c2674b] uppercase tracking-wider">
+                    <span className="text-[10px] sm:text-[11px] text-[#c2674b] uppercase tracking-wider">
                       Ancien Principal · RDC
                     </span>
                   </div>

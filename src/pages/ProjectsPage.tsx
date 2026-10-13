@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useBranch } from '../utils/useBranch';
 import { churchProjects } from '../data/mockData';
-import { Target, Heart, CheckCircle2, MapPin, DollarSign, Send } from 'lucide-react';
+import { Target, Heart, CheckCircle2, MapPin, Send } from 'lucide-react';
 
 export default function ProjectsPage() {
   const { branch, branchKey } = useBranch();
   const [pledgeSubmitted, setPledgeSubmitted] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState<number>(1);
 
-  // Put the project matching current branch first!
+  // Put project matching current branch first
   const sortedProjects = [...churchProjects].sort((a, b) => {
     if (a.branchKey === branchKey) return -1;
     if (b.branchKey === branchKey) return 1;
@@ -16,19 +16,19 @@ export default function ProjectsPage() {
   });
 
   return (
-    <div className="bg-[#faf7f2] min-h-screen py-12 px-4 sm:px-8">
+    <div className="bg-[#faf7f2] min-h-screen py-8 sm:py-12 px-4 sm:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Page Banner */}
-        <div className="bg-[#161c22] text-white rounded-xl p-8 sm:p-12 mb-10 shadow-lg border border-slate-800">
+        <div className="bg-[#161c22] text-white rounded-xl p-6 sm:p-10 md:p-12 mb-8 sm:mb-10 shadow-lg border border-slate-800">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#c2674b] mb-3">
-              <Target className="w-4 h-4" />
+              <Target className="w-4 h-4 shrink-0" />
               <span>Édification & Solidarité : {branch.name}</span>
             </div>
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight text-white mb-4">
+            <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight text-white mb-3 sm:mb-4">
               Projets & Œuvres de la Mission
             </h1>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light mb-6">
+            <p className="text-slate-300 text-xs sm:text-base leading-relaxed font-light mb-6">
               Soutenez le développement des lieux de culte, la distribution de la Sainte Bible et l'aide fraternelle aux assemblées locales en République Démocratique du Congo.
             </p>
           </div>
@@ -36,18 +36,18 @@ export default function ProjectsPage() {
 
         {/* Highlight local branch project */}
         <div className="mb-12">
-          <h2 className="font-serif text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-[#c2674b]" />
-            Projets en Cours (Priorité à la Branche de {branch.name})
+          <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-[#c2674b] shrink-0" />
+            <span>Projets en Cours (Branche de {branch.name})</span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {sortedProjects.map((project) => {
               const isCurrentBranch = project.branchKey === branchKey;
               return (
                 <div
                   key={project.id}
-                  className={`bg-white rounded-xl border p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between ${
+                  className={`bg-white rounded-xl border p-5 sm:p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between ${
                     isCurrentBranch
                       ? 'border-[#c2674b] ring-2 ring-[#c2674b]/30'
                       : 'border-[#e8e2d8]'
@@ -55,11 +55,11 @@ export default function ProjectsPage() {
                 >
                   <div>
                     <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider mb-3">
-                      <span className="flex items-center gap-1.5 text-[#c2674b]">
-                        <MapPin className="w-3.5 h-3.5" />
+                      <span className="flex items-center gap-1.5 text-[#c2674b] truncate">
+                        <MapPin className="w-3.5 h-3.5 shrink-0" />
                         {project.location}
                       </span>
-                      <span className="bg-slate-100 text-slate-800 px-2 py-0.5 rounded">
+                      <span className="bg-slate-100 text-slate-800 px-2 py-0.5 rounded text-[11px] shrink-0">
                         {project.percent}% Financé
                       </span>
                     </div>
@@ -74,7 +74,7 @@ export default function ProjectsPage() {
                       {project.title}
                     </h3>
 
-                    <p className="text-xs text-slate-600 leading-relaxed mb-6">
+                    <p className="text-xs text-slate-600 leading-relaxed mb-6 font-light">
                       {project.description}
                     </p>
                   </div>
@@ -98,7 +98,7 @@ export default function ProjectsPage() {
                         setSelectedProjectId(project.id);
                         document.getElementById('pledge-box')?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="w-full flex items-center justify-center gap-1.5 bg-[#161c22] hover:bg-[#202830] text-white text-xs font-semibold uppercase tracking-wider py-2.5 px-4 rounded transition-colors"
+                      className="w-full flex items-center justify-center gap-1.5 bg-[#161c22] hover:bg-[#202830] text-white text-xs font-semibold uppercase tracking-wider py-3 px-4 rounded transition-colors min-h-[44px] cursor-pointer"
                     >
                       <Heart className="w-3.5 h-3.5 text-[#c2674b] fill-[#c2674b]" />
                       Participer à ce Projet
@@ -111,9 +111,9 @@ export default function ProjectsPage() {
         </div>
 
         {/* Pledge / Support Form */}
-        <div id="pledge-box" className="bg-white p-8 sm:p-10 rounded-xl border border-[#e8e2d8] shadow-sm">
+        <div id="pledge-box" className="bg-white p-6 sm:p-8 md:p-10 rounded-xl border border-[#e8e2d8] shadow-sm">
           <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-8">
+            <div className="text-center mb-6 sm:mb-8">
               <span className="text-xs font-semibold uppercase tracking-widest text-[#c2674b] block mb-1">
                 Générosité & Action
               </span>
@@ -149,11 +149,11 @@ export default function ProjectsPage() {
                   <select
                     value={selectedProjectId}
                     onChange={(e) => setSelectedProjectId(Number(e.target.value))}
-                    className="w-full bg-[#faf7f2] border border-[#e8e2d8] text-slate-900 text-xs sm:text-sm rounded p-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b]"
+                    className="w-full bg-[#faf7f2] border border-[#e8e2d8] text-slate-900 text-base sm:text-sm rounded p-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b] min-h-[44px]"
                   >
                     {churchProjects.map((p) => (
                       <option key={p.id} value={p.id}>
-                        {p.title} ({p.location}) — Objectif: {p.target}
+                        {p.title} ({p.location})
                       </option>
                     ))}
                   </select>
@@ -168,7 +168,7 @@ export default function ProjectsPage() {
                       type="text"
                       required
                       placeholder="Ex: Frère David Kabamba"
-                      className="w-full bg-[#faf7f2] border border-[#e8e2d8] text-slate-900 text-xs sm:text-sm rounded p-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b]"
+                      className="w-full bg-[#faf7f2] border border-[#e8e2d8] text-slate-900 text-base sm:text-sm rounded p-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b] min-h-[44px]"
                     />
                   </div>
                   <div>
@@ -179,7 +179,7 @@ export default function ProjectsPage() {
                       type="tel"
                       required
                       placeholder="+243 ..."
-                      className="w-full bg-[#faf7f2] border border-[#e8e2d8] text-slate-900 text-xs sm:text-sm rounded p-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b]"
+                      className="w-full bg-[#faf7f2] border border-[#e8e2d8] text-slate-900 text-base sm:text-sm rounded p-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b] min-h-[44px]"
                     />
                   </div>
                 </div>
@@ -191,13 +191,13 @@ export default function ProjectsPage() {
                   <input
                     type="text"
                     placeholder="Ex: 50 USD / 100,000 CDF"
-                    className="w-full bg-[#faf7f2] border border-[#e8e2d8] text-slate-900 text-xs sm:text-sm rounded p-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b]"
+                    className="w-full bg-[#faf7f2] border border-[#e8e2d8] text-slate-900 text-base sm:text-sm rounded p-3 focus:outline-none focus:ring-1 focus:ring-[#c2674b] min-h-[44px]"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-[#c2674b] hover:bg-[#ab573c] text-white font-semibold text-xs uppercase tracking-widest py-3.5 px-4 rounded transition-colors shadow-md flex items-center justify-center gap-2"
+                  className="w-full bg-[#c2674b] hover:bg-[#ab573c] text-white font-semibold text-xs uppercase tracking-widest py-3.5 px-4 rounded transition-colors shadow-md flex items-center justify-center gap-2 min-h-[46px] cursor-pointer active:scale-98"
                 >
                   <Send className="w-4 h-4" />
                   Valider Mon Engagement pour la Mission
