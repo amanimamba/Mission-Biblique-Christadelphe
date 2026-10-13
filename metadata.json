@@ -1,0 +1,6 @@
+{
+  "name": "Mission Biblique Christadelphe",
+  "description": "Portail des activités de la Mission Biblique Christadelphe, incluant les cultes, événements et projets des différentes branches.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
