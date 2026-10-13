@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Shield, Heart, Users, Compass, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Shield, Heart, Users, Compass, ChevronRight, ArrowRight } from 'lucide-react';
 import { churchMinistries } from '../data/mockData';
+import { useBranch } from '../utils/useBranch';
 
 export default function MinistriesBanner() {
   const [selectedMinistry, setSelectedMinistry] = useState<string | null>(null);
+  const { branchLink, branch } = useBranch();
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
@@ -25,13 +28,22 @@ export default function MinistriesBanner() {
   return (
     <section id="ministeres" className="bg-[#161c22] text-white py-14 px-4 sm:px-8 border-y border-slate-800">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10">
-          <span className="text-[11px] uppercase tracking-[0.25em] font-semibold text-[#c2674b] block mb-1">
-            Au Service de la Communauté
-          </span>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider text-white">
-            Nos Ministères & Départements
-          </h2>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <span className="text-[11px] uppercase tracking-[0.25em] font-semibold text-[#c2674b] block mb-1">
+              Au Service de la Communauté à {branch.name}
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider text-white">
+              Nos Ministères & Départements
+            </h2>
+          </div>
+          <Link
+            to={branchLink('/ministeres')}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#e89c83] hover:text-white uppercase tracking-wider transition-colors"
+          >
+            Découvrir tous les départements ({churchMinistries.length})
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
 
         {/* 4 horizontal ministry blocks matching the dark banner in reference image */}
@@ -83,7 +95,7 @@ export default function MinistriesBanner() {
               </div>
               <button
                 onClick={() => setSelectedMinistry(null)}
-                className="text-xs text-slate-400 hover:text-white border border-slate-700 px-3 py-1.5 rounded"
+                className="text-xs text-slate-400 hover:text-white border border-slate-700 px-3 py-1.5 rounded cursor-pointer"
               >
                 Fermer
               </button>
@@ -93,7 +105,7 @@ export default function MinistriesBanner() {
             </p>
             <div className="flex flex-wrap items-center gap-6 text-xs text-slate-400">
               <span>📅 Rencontre bi-mensuelle le Samedi après-midi</span>
-              <span>📍 Salle de Fraternité & Groupes de Maisons</span>
+              <span>📍 Salle de Fraternité & Groupes de Maisons à {branch.name}</span>
               <span>ℹ️ Ouvert à tous les membres et sympathisants</span>
             </div>
           </div>

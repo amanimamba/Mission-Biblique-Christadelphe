@@ -1,35 +1,38 @@
 import React from 'react';
-import { BookOpen, Users, Compass, HeartHandshake } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useBranch } from '../utils/useBranch';
 
 export default function FeatureBar() {
+  const { branchLink } = useBranch();
+
   const features = [
     {
       image: '/src/assets/images/bible_study_reading_1791887625322.jpg',
       category: 'Lecture des Écritures',
       title: 'Études Bibliques',
       description: 'Instruction méthodique de la Genèse à l’Apocalypse selon la saine doctrine.',
-      link: '#cultes',
+      path: '/cultes',
     },
     {
       image: '/src/assets/images/culte_detail_thumb_1791721724068.jpg',
       category: 'Fraction du Pain',
       title: 'Culte du Dimanche',
       description: 'Communion fraternelle mémorielle ordonnée par Jésus pour ses disciples.',
-      link: '#cultes',
+      path: '/cultes',
     },
     {
       image: '/src/assets/images/hero_kinshasa_church_1791721710657.jpg',
       category: 'Espérance Messianique',
       title: 'Notre Vision',
       description: 'L’attente du rétablissement du Royaume de Dieu sur la terre avec justice.',
-      link: '#apropos',
+      path: '/apropos',
     },
     {
       image: '/src/assets/images/event_card_thumb_1791721734782.jpg',
       category: 'Amour en Action',
       title: 'Entraide & Jeunesse',
       description: 'Soutien mutuel, diaconie fraternelle et formation de la nouvelle génération.',
-      link: '#evenements',
+      path: '/evenements',
     },
   ];
 
@@ -38,10 +41,10 @@ export default function FeatureBar() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((item, idx) => (
-            <a
+            <Link
               key={idx}
-              href={item.link}
-              className="group bg-white rounded-lg overflow-hidden border border-[#e8e2d8] shadow-sm hover:shadow-md transition-all duration-300 flex flex-col"
+              to={branchLink(item.path)}
+              className="group bg-white rounded-lg overflow-hidden border border-[#e8e2d8] shadow-sm hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer"
             >
               <div className="h-44 overflow-hidden relative">
                 <img
@@ -65,7 +68,7 @@ export default function FeatureBar() {
                   </p>
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

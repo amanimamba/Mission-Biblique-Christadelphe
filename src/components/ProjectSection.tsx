@@ -1,12 +1,23 @@
 import React from 'react';
-import { Target, Heart, CheckCircle, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Target, Heart, ArrowRight } from 'lucide-react';
 import { churchProjects, Branch } from '../data/mockData';
+import { useBranch } from '../utils/useBranch';
 
 interface ProjectSectionProps {
   branch: Branch;
 }
 
 export default function ProjectSection({ branch }: ProjectSectionProps) {
+  const { branchLink, branchKey } = useBranch();
+
+  // Put project related to current branch first
+  const sorted = [...churchProjects].sort((a, b) => {
+    if (a.branchKey === branchKey) return -1;
+    if (b.branchKey === branchKey) return 1;
+    return 0;
+  });
+
   return (
     <section id="projets" className="bg-[#faf7f2] py-16 sm:py-24 px-4 sm:px-8 border-b border-[#e8e2d8]">
       <div className="max-w-7xl mx-auto">
@@ -19,22 +30,30 @@ export default function ProjectSection({ branch }: ProjectSectionProps) {
               Nos Projets & Œuvres Missionnaires
             </h2>
           </div>
-          <p className="text-slate-600 text-xs sm:text-sm max-w-md">
-            Chaque contribution participe à l’expansion de l’Évangile et à la solidarité pratique envers les assemblées en RD Congo.
-          </p>
+          <Link
+            to={branchLink('/projets')}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#c2674b] hover:text-[#ab573c] uppercase tracking-wider transition-colors"
+          >
+            Tous les projets de la mission ({churchProjects.length})
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {churchProjects.map((project) => (
+          {sorted.slice(0, 3).map((project) => (
             <div
               key={project.id}
-              className="bg-white rounded-lg border border-[#e8e2d8] p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+              className={`bg-white rounded-lg border p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between ${
+                project.branchKey === branchKey
+                  ? 'border-[#c2674b] ring-1 ring-[#c2674b]/50'
+                  : 'border-[#e8e2d8]'
+              }`}
             >
               <div>
                 <div className="flex items-center justify-between text-xs font-semibold text-[#c2674b] uppercase tracking-wider mb-3">
                   <span className="flex items-center gap-1.5">
                     <Target className="w-4 h-4" />
-                    Projet Actif
+                    {project.location}
                   </span>
                   <span>{project.percent}% Financé</span>
                 </div>
@@ -62,13 +81,13 @@ export default function ProjectSection({ branch }: ProjectSectionProps) {
                   <span>Objectif : <strong>{project.target}</strong></span>
                 </div>
 
-                <a
-                  href="#contact"
+                <Link
+                  to={branchLink('/projets')}
                   className="w-full inline-flex items-center justify-center gap-2 bg-[#161c22] hover:bg-slate-800 text-white text-xs font-semibold uppercase tracking-wider py-2.5 px-4 rounded transition-colors"
                 >
                   <Heart className="w-3.5 h-3.5 text-[#c2674b] fill-[#c2674b]" />
                   Participer à ce Projet
-                </a>
+                </Link>
               </div>
             </div>
           ))}

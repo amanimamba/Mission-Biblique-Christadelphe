@@ -1,12 +1,16 @@
 import React from 'react';
-import { MapPin, Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Branch } from '../data/mockData';
+import { useBranch } from '../utils/useBranch';
 
 interface HeroBannerProps {
   branch: Branch;
 }
 
 export default function HeroBanner({ branch }: HeroBannerProps) {
+  const { branchLink } = useBranch();
+
   return (
     <section id="hero" className="relative w-full bg-[#11161b] text-white overflow-hidden">
       {/* Background image with cinematic dark gradient scrim matching reference */}
@@ -50,19 +54,19 @@ export default function HeroBanner({ branch }: HeroBannerProps) {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center gap-4">
-          <a
-            href="#cultes"
+          <Link
+            to={branchLink('/cultes')}
             className="inline-flex items-center gap-2 bg-[#c2674b] hover:bg-[#ab573c] text-white text-xs sm:text-sm font-semibold uppercase tracking-widest px-6 py-3.5 rounded transition-all shadow-lg hover:shadow-xl hover:translate-y-[-1px]"
           >
             Nos Cultes & Prédications
             <ArrowRight className="w-4 h-4" />
-          </a>
-          <a
-            href="#apropos"
+          </Link>
+          <Link
+            to={branchLink('/apropos')}
             className="inline-flex items-center gap-2 bg-transparent hover:bg-white/10 text-white border border-white/70 hover:border-white text-xs sm:text-sm font-semibold uppercase tracking-widest px-6 py-3.5 rounded transition-colors"
           >
             Découvrir Notre Foi
-          </a>
+          </Link>
         </div>
       </div>
 
